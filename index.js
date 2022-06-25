@@ -157,6 +157,7 @@ instance.prototype.action = function(action) {
 			cmd = 'MT00SV00' + 0 + action.options.preset + 'NT';
 			break;
 	}
+	self.log('info','Created command: ' + cmd);
 
 	if (cmd !== undefined) {		
 		if (self.socket !== undefined) {
@@ -187,6 +188,8 @@ instance.prototype.action = function(action) {
 			self.socket.on('connect', function () {
 				self.debug('Connected (' + self.config.host + ')');
 				self.debug('Turning outlet ' + action.action + ': ' + self.config.host);
+				self.log('info','Connected (' + self.config.host + ')');
+				self..log('info','Turning outlet ' + action.action + ': ' + self.config.host);
 				self.socket.send(Buffer.from(cmd, 'hex'));
 				self.socket.send(Buffer.from('\r\n'));
 				self.socket.destroy();
